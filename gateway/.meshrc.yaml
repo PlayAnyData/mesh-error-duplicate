@@ -1,0 +1,10 @@
+sources:
+  - name: Catalog
+    handler:
+      graphql:
+        source: '../catalog.gql'
+        endpoint: '{env.CATALOG_URL}/graphql'
+        operationHeaders:
+          x-api-key: "{context.headers['x-api-key']}"
+
+additionalEnvelopPlugins: ./src/envelopPlugins.ts

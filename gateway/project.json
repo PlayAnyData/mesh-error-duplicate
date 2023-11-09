@@ -1,0 +1,89 @@
+{
+  "name": "apps-apis-gateway",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "packages/apps/apis/gateway/src",
+  "targets": {
+    "generate": {
+      "command": "npx graphql-mesh build --dir packages/apps/apis/gateway --verbose"
+    },
+    "container": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "engine": "docker",
+        "push": false,
+        "load": true,
+        "build-args": ["DOMAIN=gateway"],
+        "file": "packages/libs/docker/API.Dockerfile",
+        "metadata": {
+          "images": ["${IMAGE_NAME}"],
+          "tags": [
+            "type=schedule",
+            "type=ref,event=branch",
+            "type=ref,event=tag",
+            "type=ref,event=pr",
+            "type=semver,pattern={{version}}",
+            "type=semver,pattern={{major}}.{{minor}}.{{patch}}",
+            "type=semver,pattern={{major}}",
+            "type=sha",
+            "type=sha,format=long, prefix=0.1.0-",
+            "type=sha,format=long"
+          ]
+        }
+      }
+    },
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/packages/apps/apis/gateway",
+        "main": "packages/apps/apis/gateway/src/main.ts",
+        "tsConfig": "packages/apps/apis/gateway/tsconfig.app.json",
+        "generatePackageJson": true
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false
+        }
+      },
+      "dependsOn": ["generate"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/packages/apps/apis/gateway"],
+      "options": {
+        "jestConfig": "packages/apps/apis/gateway/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "dependsOn": [
+        {
+          "target": "generate"
+        }
+      ],
+      "options": {
+        "buildTarget": "apps-apis-gateway:build:production"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "apps-apis-gateway:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/apps/apis/gateway/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,30 @@
+{
+  "name": "gateway",
+  "version": "1.4.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start-gateway": "mesh dev"
+  },
+  "dependencies": {
+    "@graphql-mesh/cli": "0.87.14",
+    "@graphql-mesh/graphql": "0.95.7",
+    "@graphql-mesh/http": "0.96.12",
+    "@graphql-mesh/transform-filter-schema": "0.95.7",
+    "@graphql-mesh/transform-rename": "0.95.8",
+    "@nestjs/apollo": "12.0.9",
+    "@nestjs/axios": "^3.0.0",
+    "@nestjs/cache-manager": "^2.1.0",
+    "@nestjs/common": "10.2.7",
+    "@nestjs/config": "3.1.1",
+    "@nestjs/core": "10.2.7",
+    "@nestjs/graphql": "12.0.9",
+    "@nestjs/platform-fastify": "10.2.7",
+    "@nestjs/schedule": "3.0.4",
+    "@nestjs/terminus": "10.1.1",
+    "prom-client": "^14.2.0"
+  },
+  "overrides": {
+    "@graphql-mesh/runtime": "0.96.3"
+  }
+}
