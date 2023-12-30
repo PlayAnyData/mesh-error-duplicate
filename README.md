@@ -23,7 +23,10 @@ with the following variables:
 { "filter": { "costKey": { "in": [ "201" ] }, "inactive": { "equals": false } } } 
 ```
 
-You can see the error. If you comment the second source definition, you may see it is working "fine" and trying to execute the source (which we have not started). So somehow it is related to the second schema.
+You can see the error. 
+
+# Things to make the query run
+If you comment the second source definition, you may see it is working "fine" and trying to execute the source (which we have not started). So somehow it is related to the second schema.
 
 The following query, which is semantically equal to the previous one, is also running "fine".
 ```
