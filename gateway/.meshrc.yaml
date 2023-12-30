@@ -6,11 +6,11 @@ sources:
         endpoint: '{env.CATALOG_URL}/graphql'
         operationHeaders:
           x-api-key: "{context.headers['x-api-key']}"
+  - name: Catalog2
+    handler:
+      graphql:
+        source: '../other.gql'
+        endpoint: '{env.SECOND_URL}/graphql'
+        operationHeaders:
+          x-api-key: "{context.headers['x-api-key']}"
 
-additionalEnvelopPlugins: ./src/envelopPlugins.ts
-
-transforms:
-  - filterSchema:
-      mode: wrap
-      filters:
-        - SYSBILLCOWhereInput.!header

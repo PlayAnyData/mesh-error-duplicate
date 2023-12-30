@@ -1,0 +1,7 @@
+type myQuery {
+  id: Int!
+}
+
+type Query {
+  myQuery: myQuery!
+}
