@@ -8,3 +8,9 @@ sources:
           x-api-key: "{context.headers['x-api-key']}"
 
 additionalEnvelopPlugins: ./src/envelopPlugins.ts
+
+transforms:
+  - filterSchema:
+      mode: wrap
+      filters:
+        - SYSBILLCOWhereInput.!header

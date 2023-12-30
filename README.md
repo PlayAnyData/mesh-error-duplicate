@@ -7,12 +7,18 @@ Then, execute ``npm run start-gateway`` to start the gateway.
 
 Execute the following query:
 ```
-query myQuery {
-  myQuery {
-   	id 
-    toast
+query getDUMMYByConfigurationKeys($filter: DUMMYWhereInput!) {
+  DUMMYList(instance: "DEU31", limit: 10, filter: $filter) {
+    items {
+      id
+    }
+    totalCount
+    limit
   }
-}
+} 
 ```
 
-Inspect the duplicated results and the weird call order in log via envelopPlugins.ts
+with the following variables:
+```
+{ "filter": { "costKey": { "in": [ "201" ] }, "inactive": { "equals": false } } } 
+```

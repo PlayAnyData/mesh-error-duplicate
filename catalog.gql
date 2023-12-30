@@ -1,7 +1,165 @@
-type myQuery {
-  id: Int!
+input Pagination {
+  """Default: 0"""
+  offset: Int
+
+  """Default: 100"""
+  limit: Int
+}
+
+input BoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+  isSet: Boolean
+}
+
+input NestedBoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+  isSet: Boolean
+}
+
+
+type DUMMYList {
+  items: [DUMMY]!
+
+  """The given offset. Default: 0"""
+  offset: Int
+
+  """The given limit. Default: 100"""
+  limit: Int
+
+  """
+  Total count
+  """
+  totalCount: Int
+}
+
+type DUMMY {
+  id: ID!
+}
+
+
+type Header_V5 {
+  version: String!
 }
 
 type Query {
-  myQuery: myQuery!
+  DUMMYList(
+    instance: String!
+    filter: DUMMYWhereInput
+    page: Pagination
+
+    """
+    For backwards compatibility only. We recommend using page.offset. Default: 0
+    """
+    offset: Int
+
+    """
+    For backwards compatibility only. We recommend using page.offset. Default: 100
+    """
+    limit: Int
+  ): DUMMYList!
+}
+
+input DUMMYWhereInput {
+  AND: [DUMMYWhereInput!]
+  OR: [DUMMYWhereInput!]
+  NOT: [DUMMYWhereInput!]
+  header: Header_V5NullableCompositeFilter
+  costKey: StringNullableFilter
+  inactive: BoolNullableFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input Header_V5ObjectEqualityInput {
+  version: String!
+}
+
+
+input Header_V5WhereInput {
+  AND: [Header_V5WhereInput!]
+  OR: [Header_V5WhereInput!]
+  NOT: [Header_V5WhereInput!]
+  version: StringFilter
+}
+
+input Header_V5NullableCompositeFilter {
+  equals: Header_V5ObjectEqualityInput
+  is: Header_V5WhereInput
+  isNot: Header_V5WhereInput
+  isSet: Boolean
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+  isSet: Boolean
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+  isSet: Boolean
 }
