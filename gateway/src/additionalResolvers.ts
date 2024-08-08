@@ -1,17 +1,29 @@
 import {
   Resolvers,
 } from '../.mesh';
-import {
-  createConnection,
-  createRef,
-  getObjectRefSelectionSet,
-} from './libs/resolverFactory';
 
-const objectRefASelectionSet = getObjectRefSelectionSet('objectRefA');
-const objectRefBSelectionSet = getObjectRefSelectionSet('objectRefB');
-const objectRefsSelectionSet = getObjectRefSelectionSet(
-  'objectRefs',
-  'objectRef'
-);
 
-export const resolvers: Resolvers = {};
+
+export function mapFromField(
+  originalFieldName: string,
+  fieldsToProject: string[] = []
+) {
+  console.log(`Field should be mapped to ${originalFieldName}`);
+  let projection = `
+    {
+      ${originalFieldName}
+    }`;
+  console.log(`Projection: ${projection}`);
+  return {
+    selectionSet: projection,
+    resolve(root) {
+      return root[originalFieldName];
+    },
+  };
+}
+
+export const resolvers: Resolvers = {
+  myQuery: {
+    secondId: mapFromField('id'),
+  },
+};

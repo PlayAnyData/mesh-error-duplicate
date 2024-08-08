@@ -17,37 +17,41 @@ export const maskError: MaskError = (err: GraphQLError) => {
 
 // Mesh specific hooks: https://the-guild.dev/graphql/mesh/docs/plugins/plugins-introduction#mesh-specific-plugin-hooks
 const prometheusRequestTime: MeshPlugin<any> = {
-  onFetch({ info }) {
-    console.log("fetch");
+  onFetch(fetchInfo) {
+    console.log(fetchInfo.info.fieldNodes[0].selectionSet.selections);
+    // console.log("fetch");
     return ({ response }) => {
-      console.log("fetch done");
+      // console.log("fetch done");
     };
   },
   onParse(args){
-    console.log("parse");
+    // console.log("parse");
     return result => {
-      console.log("parse done");
+      // console.log("parse done");
     }
   },
   onValidate(args){
-    console.log("validate");
+    // console.log("validate");
     return result => {
-      console.log(`validated with result ${result.valid}`);
-      if(!result.valid){
-        console.log("extending context now");
-        result.extendContext({ myNewVar: "heyho"});
-      }
+      // console.log(`validated with result ${result.valid}`);
+      // if(!result.valid){
+      //   console.log("extending context now");
+      //   result.extendContext({ myNewVar: "heyho"});
+      // }
     }
   },
+  onDelegate(delegate) {
+    // console.log(delegate);
+  },
   onExecute({ args }) {
-    console.log("execute");
-    console.log(`Operation type: ${args.operationName}`);
+    // console.log("execute");
+    // console.log(`Operation type: ${args.operationName}`);
 
     return {
       onExecuteDone(result) {
-        console.log("execute done");
-        console.log(`myNewVar: ${args.contextValue["myNewVar"]}`);
-        console.log(`resultContext: ${result.args.contextValue["myNewVar"]}`);
+        // console.log("execute done");
+        // console.log(`myNewVar: ${args.contextValue["myNewVar"]}`);
+        // console.log(`resultContext: ${result.args.contextValue["myNewVar"]}`);
       },
     };
   },

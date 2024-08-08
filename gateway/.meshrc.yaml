@@ -8,3 +8,6 @@ sources:
           x-api-key: "{context.headers['x-api-key']}"
 
 additionalEnvelopPlugins: ./src/envelopPlugins.ts
+
+additionalResolvers:
+  - ./src/additionalResolvers.ts

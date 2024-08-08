@@ -1,5 +1,6 @@
 type myQuery {
   id: Int!
+  secondId: Int!
 }
 
 type Query {
