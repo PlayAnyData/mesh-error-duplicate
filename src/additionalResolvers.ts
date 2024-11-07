@@ -1,6 +1,6 @@
 import {
   Resolvers,
-} from '../.mesh';
+} from '../gateway/.mesh';
 
 
 
