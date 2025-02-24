@@ -1,6 +1,4 @@
-import {
-  Resolvers,
-} from '../gateway/.mesh';
+
 
 
 
@@ -22,7 +20,7 @@ export function mapFromField(
   };
 }
 
-export const resolvers: Resolvers = {
+export const additionalResolvers = {
   myQuery: {
     secondId: mapFromField('id'),
   },
