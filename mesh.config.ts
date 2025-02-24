@@ -3,7 +3,7 @@ import {
   defineConfig as defineComposeConfig,
 } from "@graphql-mesh/compose-cli";
 import { default as additionalEnvelopPlugins } from "./src/envelopPlugins.ts";
-// import { default as additionalResolvers$0 } from "./src/additionalResolvers.ts";
+import { additionalResolvers } from "./src/additionalResolvers.ts";
 import { defineConfig as defineGatewayConfig } from "@graphql-hive/gateway";
 
 export const composeConfig = defineComposeConfig({
@@ -19,6 +19,6 @@ export const composeConfig = defineComposeConfig({
 });
 
 export const gatewayConfig = defineGatewayConfig({
-  // additionalResolvers: [additionalResolvers$0],
+  additionalResolvers: [additionalResolvers],
   plugins: (ctx) => [...additionalEnvelopPlugins],
 });
