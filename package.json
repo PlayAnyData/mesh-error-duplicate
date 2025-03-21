@@ -23,6 +23,7 @@
     "@nestjs/platform-fastify": "^11.0.10",
     "@nestjs/schedule": "^5.0.1",
     "@nestjs/terminus": "^11.0.0",
+    "gateway": "file:",
     "joi": "^17.13.3"
   }
 }
