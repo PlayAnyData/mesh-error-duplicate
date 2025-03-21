@@ -7,7 +7,10 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 
-import { createBuiltMeshHTTPHandler } from '../gateway/.mesh';
+import {
+  createGatewayRuntime,
+} from '@graphql-hive/gateway-runtime';
+import { gatewayConfigSupergraph } from './gateway.config';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -20,7 +23,8 @@ async function bootstrap() {
 
   const config = app.get<ConfigService>(ConfigService);
 
-  app.use('/graphql', createBuiltMeshHTTPHandler());
+  const serveRuntime = createGatewayRuntime(gatewayConfigSupergraph());
+  app.use(serveRuntime);
 
   const port = config.get('HTTP_PORT');
 
